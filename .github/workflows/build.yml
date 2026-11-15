@@ -1,6 +1,6 @@
 name: Build Android APK
 
-'on':                       # ← 关键：on 必须加引号，否则 YAML 会把它当成布尔值 true
+'on':
   push:
     branches: [main, master]
   workflow_dispatch:
@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
@@ -23,15 +23,21 @@ jobs:
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.11.9'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Android SDK licenses
+        run: yes | sdkmanager --licenses > /dev/null || true
 
       - name: Install Buildozer and Cython
         run: |
           python -m pip install --upgrade pip wheel setuptools
-          pip install buildozer cython==0.29.37
+          pip install buildozer "cython<3.0"
 
       - name: Cache Buildozer global dir
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .buildozer_global
           key: buildozer-global-${{ hashFiles('buildozer.spec') }}
@@ -41,11 +47,15 @@ jobs:
       - name: Build APK with Buildozer
         run: |
           export BUILDOZER_WARN_ON_ROOT=0
+          export P4A_PYTHON=3.11.9
           buildozer -v android debug
+        env:
+          ANDROIDAPI: "33"
+          ANDROIDMINAPI: "21"
 
       - name: Upload APK
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: AlarmApp-APK
           path: bin/*.apk
