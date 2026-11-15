@@ -1,0 +1,21 @@
+[app]
+title = AlarmApp
+package.name = alarmapp
+package.domain = com.alarmapp
+source.dir = .
+source.include_exts = py,png,json,conf
+version = 2.0
+requirements = python3,kivy,pyjnius
+orientation = portrait
+fullscreen = 0
+android.permissions = VIBRATE,WAKE_LOCK,RECEIVE_BOOT_COMPLETED,POST_NOTIFICATIONS,FOREGROUND_SERVICE,REORDER_TASKS
+android.features = android.hardware.usb.accessory
+android.api = 33
+android.minapi = 21
+android.ndk = 25b
+android.accept_sdk_license = True
+android.service_name = ServiceAlarms
+android.service_entrypoint = service.py
+p4a.bootstrap = sdl2
+log_level = 2
+warn_on_root = 0
