@@ -23,7 +23,7 @@ jobs:
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11.9'
+          python-version: '3.11'
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
@@ -47,7 +47,7 @@ jobs:
       - name: Build APK with Buildozer
         run: |
           export BUILDOZER_WARN_ON_ROOT=0
-          export P4A_PYTHON=3.11.9
+          export P4A_PYTHON=3.11
           buildozer -v android debug
         env:
           ANDROIDAPI: "33"
