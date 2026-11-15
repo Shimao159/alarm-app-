@@ -12,7 +12,7 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,ttf
 
 # (list) Application requirements
-# 关键：钉死 Python 3.11.9 和 Kivy 2.3.0，避免拉到 3.14
+# 钉死 Python 3.11.9 与 Kivy 2.3.0，避免拉到 3.14
 requirements = python3==3.11.9,kivy==2.3.0
 
 # (str) App versioning
@@ -28,7 +28,7 @@ android.minapi = 21
 # (str) NDK version
 android.ndk = 25b
 
-# 关键：强制 APK 内嵌 Python 3.11.9
+# 强制 APK 内嵌 Python 3.11.9
 android.python_version = 3.11.9
 
 # (list) Android architectures
@@ -68,29 +68,17 @@ log_level = 2
 
 [buildozer]
 
-# (int) Log level
 log_level = 2
-
-# (int) Android build timeout
 build_dir = .buildozer
 
-# (str) Android NDK directory (leave empty to auto-download)
 # android.ndk_path =
-
-# (str) Android SDK directory (leave empty to auto-download)
 # android.sdk_path =
-
-# (str) ANT directory (leave empty to auto-download)
 # android.ant_path =
 
 
 [android]
 
-# (bool) Indicate whether the app should be built in debug mode
 android.debug = True
-
-# (str) The Android app versioncode (an integer distinguishing each build)
 # android.numeric_version =
 
-# (bool) Automatically accept SDK license
 android.accept_sdk_license = True
